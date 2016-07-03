@@ -27,8 +27,6 @@
 	  </div>
 	</div>
     
-    <!-- Views, and they are tabs-->
-    <!-- We need to set "toolbar-through" class on it to keep space for our tab bar-->
     <div class="views tabs">
       <div id="view-news" class="view view-main tab active">
       	<div class="navbar"></div>
@@ -41,54 +39,8 @@
 	           </div>
 	       </div>
         </div>
-      </div>
-      
-      <div id="view-chat" class="view tab">
-        <!-- We can make with view with navigation, let's add Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="center sliding">Second View</div>
-          </div>
-        </div>
-        <div class="pages navbar-through">
-          <div data-page="chat" class="page">
-            <div class="page-content">
-              <div class="fix-center">
-                  <span style="width:42px; height:42px" class="preloader"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-     
-      <div id="view-friend" class="view tab">
-      	<div class="navbar"></div>
-        <div class="pages navbar-through">
-          <div data-page="friend" class="page">
-            <div class="page-content">
-              <div class="fix-center">
-                  <span style="width:42px; height:42px" class="preloader"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="view-mine" class="view tab">
-      	<div class="navbar"></div>
-        <div class="pages navbar-through">
-          <div data-page="mineHome" class="page">
-            <div class="page-content">
-              <div class="fix-center">
-                  <span style="width:42px; height:42px" class="preloader"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Bottom Tabbar-->
-      <div class="toolbar toolbar-through tabbar tabbar-labels">
+        <!-- Bottom Tabbar--><!-- toolbar-hidden隐藏toolbar -->
+      <div class="toolbar tabbar tabbar-labels">
         <div class="toolbar-inner">
         	<a href="#view-news" class="tab-link active"> 
         		<i class="icon icon-info"></i>
@@ -108,6 +60,116 @@
         	</a>
         </div>
       </div>
+      </div>
+      
+      <div id="view-chat" class="view tab">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">Second View</div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div data-page="chat" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Tabbar--><!-- toolbar-hidden隐藏toolbar -->
+      <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner">
+        	<a href="#view-news" class="tab-link active"> 
+        		<i class="icon icon-info"></i>
+        		<span class="tabbar-label">发现</span>
+        	</a>
+        	<a href="#view-chat" class="tab-link">
+        		<i class="icon icon-chat"><span class="badge bg-red">4</span></i>
+        		<span class="tabbar-label">聊天</span>
+        	</a>
+        	<a href="#view-friend" class="tab-link"> 
+        		<i class="icon icon-friend"></i>
+        		<span class="tabbar-label">朋友</span>
+        	</a>
+        	<a href="#view-mine" class="tab-link"> 
+        		<i class="icon icon-mine"></i>
+        		<span class="tabbar-label">我的</span>
+        	</a>
+        </div>
+      </div>
+      </div>
+     
+      <div id="view-friend" class="view tab">
+      	<div class="navbar"></div>
+        <div class="pages navbar-through">
+          <div data-page="friend" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Tabbar--><!-- toolbar-hidden隐藏toolbar -->
+      <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner">
+        	<a href="#view-news" class="tab-link active"> 
+        		<i class="icon icon-info"></i>
+        		<span class="tabbar-label">发现</span>
+        	</a>
+        	<a href="#view-chat" class="tab-link">
+        		<i class="icon icon-chat"><span class="badge bg-red">4</span></i>
+        		<span class="tabbar-label">聊天</span>
+        	</a>
+        	<a href="#view-friend" class="tab-link"> 
+        		<i class="icon icon-friend"></i>
+        		<span class="tabbar-label">朋友</span>
+        	</a>
+        	<a href="#view-mine" class="tab-link"> 
+        		<i class="icon icon-mine"></i>
+        		<span class="tabbar-label">我的</span>
+        	</a>
+        </div>
+      </div>
+      </div>
+      
+      <div id="view-mine" class="view tab">
+      	<div class="navbar"></div>
+        <div class="pages navbar-through">
+          <div data-page="mineHome" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Tabbar--><!-- toolbar-hidden隐藏toolbar -->
+      <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner">
+        	<a href="#view-news" class="tab-link active"> 
+        		<i class="icon icon-info"></i>
+        		<span class="tabbar-label">发现</span>
+        	</a>
+        	<a href="#view-chat" class="tab-link">
+        		<i class="icon icon-chat"><span class="badge bg-red">4</span></i>
+        		<span class="tabbar-label">聊天</span>
+        	</a>
+        	<a href="#view-friend" class="tab-link"> 
+        		<i class="icon icon-friend"></i>
+        		<span class="tabbar-label">朋友</span>
+        	</a>
+        	<a href="#view-mine" class="tab-link"> 
+        		<i class="icon icon-mine"></i>
+        		<span class="tabbar-label">我的</span>
+        	</a>
+        </div>
+      </div>
+      </div>
+      
+      
     </div>
     
     <script data-main="/js/app" src="/js/libs/require.js"></script>
