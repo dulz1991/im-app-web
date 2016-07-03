@@ -1,0 +1,44 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="link icon-only back" id="backToMain">
+                <i class="icon icon-back"></i>
+            </a>
+        </div>
+        <div class="center newstitle sliding"></div>
+        <div class="right"> 
+        	<a href="#" class="link icon-only open-panel">
+        		<i class="icon icon-bars"></i>
+        	</a>
+        </div>
+    </div>
+</div>
+
+<div class="pages navbar-through">
+    <div data-page="chatList" class="page">
+        <div class="page-content infinite-scroll-reply" id="chatListContent">
+            <script id="chatListTemplate" type="text/template">
+				{{#if chatList}}
+				<div class="list-block media-list">
+                	<ul>
+						{{#each friends}}
+                  		<li>
+							<a href="/pages/friend/chat.html?friendUserId={{friendUserId}}" class="item-link item-content">
+                      			<div class="item-media"><img src="{{avatar}}" width="80"></div>
+                      			<div class="item-inner">
+                        			<div class="item-title-row">
+                          				<div class="item-title">{{usernick}}</div>
+                        			</div>
+									<div class="item-subtitle"></div>
+                        			<div class="item-text" style="height:24px;">个人说明</div>
+                      			</div>	
+							</a>
+						</li>
+						{{/each}}
+                	</ul>
+              	</div>
+				{{/if}}
+            </script>
+        </div>
+    </div>
+</div>

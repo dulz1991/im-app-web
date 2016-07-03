@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.UserRelationMapper">
+
+<resultMap type="com.im.app.base.bean.UserRelation" id="UserRelationBaseMapper">
+	<id property="id" column="id" />
+	<result property="myUserId" column="my_user_id" />
+	<result property="friendUserId" column="friend_user_id" />
+	<result property="createTime" column="create_time" />
+	<result property="updateTime" column="update_time" />
+	<result property="status" column="status" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert into user_relation(my_user_id, friend_user_id, create_time,update_time,status) 
+   	values(#{myUserId},#{friendUserId},now(),now(),#{status})  
+</insert>
+
+<update id="update">
+	update user_relation set 
+	<if test="status != null">
+     	status = ${status},
+   	</if>
+   	update_time = now()
+   	where id = ${id}
+</update>
+
+
+<select id="getByParm_count" resultType="Integer">
+	select count(*) from user_relation where 1=1 
+	<if test="parm.status != null">
+     	and status = ${parm.status} 
+   	</if>
+   	<if test="parm.myUserId != null">
+     	and my_user_id = ${parm.myUserId}
+   	</if>
+   	<if test="parm.friendUserId != null">
+     	and friend_user_id = ${parm.friendUserId}
+   	</if>
+</select>
+<select id="getByParm" resultMap="UserRelationBaseMapper">
+	select *
+	from user_relation where 1=1 
+	<if test="parm.status != null">
+     	and status = ${parm.status} 
+   	</if>
+   	<if test="parm.myUserId != null">
+     	and my_user_id = ${parm.myUserId}
+   	</if>
+   	<if test="parm.friendUserId != null">
+     	and friend_user_id = ${parm.friendUserId}
+   	</if>
+   	order by id desc
+</select>
+
+<select id="getById" resultMap="UserRelationBaseMapper">
+	select * from user_relation where id = #{id}
+</select>
+
+</mapper>

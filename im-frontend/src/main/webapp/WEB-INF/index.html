@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>IM App</title>
+    <link rel="stylesheet" href="/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/icon.css">
+  </head>
+  <body>
+    
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    
+     <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+	  <div class="content-block">
+      	<p><a href="/pages/mine/createNews.html" class="panel-close"><i class="icon icon-plus"></i> 发表发现</a></p>
+      	<p><a href="#" class="panel-close"><i class="icon icon-close"></i> 关闭侧边栏</a></p>
+	  </div>
+	</div>
+    
+    <!-- Views, and they are tabs-->
+    <!-- We need to set "toolbar-through" class on it to keep space for our tab bar-->
+    <div class="views tabs">
+      <div id="view-news" class="view view-main tab active">
+      	<div class="navbar"></div>
+        <div class="pages navbar-through">
+	       <div data-page="news" class="page">
+	           <div class="page-content">
+	               <div class="fix-center">
+	                   <span style="width:42px; height:42px" class="preloader"></span>
+	               </div>
+	           </div>
+	       </div>
+        </div>
+      </div>
+      
+      <div id="view-chat" class="view tab">
+        <!-- We can make with view with navigation, let's add Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding">Second View</div>
+          </div>
+        </div>
+        <div class="pages navbar-through">
+          <div data-page="chat" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div id="view-friend" class="view tab">
+      	<div class="navbar"></div>
+        <div class="pages navbar-through">
+          <div data-page="friend" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="view-mine" class="view tab">
+      	<div class="navbar"></div>
+        <div class="pages navbar-through">
+          <div data-page="mineHome" class="page">
+            <div class="page-content">
+              <div class="fix-center">
+                  <span style="width:42px; height:42px" class="preloader"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom Tabbar-->
+      <div class="toolbar toolbar-through tabbar tabbar-labels">
+        <div class="toolbar-inner">
+        	<a href="#view-news" class="tab-link active"> 
+        		<i class="icon icon-info"></i>
+        		<span class="tabbar-label">发现</span>
+        	</a>
+        	<a href="#view-chat" class="tab-link">
+        		<i class="icon icon-chat"><span class="badge bg-red">4</span></i>
+        		<span class="tabbar-label">聊天</span>
+        	</a>
+        	<a href="#view-friend" class="tab-link"> 
+        		<i class="icon icon-friend"></i>
+        		<span class="tabbar-label">朋友</span>
+        	</a>
+        	<a href="#view-mine" class="tab-link"> 
+        		<i class="icon icon-mine"></i>
+        		<span class="tabbar-label">我的</span>
+        	</a>
+        </div>
+      </div>
+    </div>
+    
+    <script data-main="/js/app" src="/js/libs/require.js"></script>
+    <script type="text/javascript" src="/js/libs/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="/js/libs/framework7.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script> -->
+  </body>
+</html>

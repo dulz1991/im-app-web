@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.NewsReplyMapper">
+
+<resultMap type="com.im.app.base.bean.NewsReply" id="NewsReplyBaseMapper">
+	<id property="id" column="id" />
+	<result property="newsId" column="news_id" />
+	<result property="replyUserId" column="reply_user_id" />
+	<result property="replyContent" column="reply_content" />
+	<result property="replyToUserId" column="reply_to_user_id" />
+	<result property="createTime" column="create_time" />
+	<result property="status" column="status" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert into news_reply(news_id, reply_user_id, reply_content, reply_to_user_id, create_time, status) 
+   	values(#{newsId}, #{replyUserId}, #{replyContent}, #{replyToUserId}, now(), 1)  
+</insert>
+
+<update id="update">
+	update news_reply set 
+	<if test="status != null">
+     	status = ${status},
+   	</if>
+   	update_time = now()
+   	where id = ${id}
+</update>
+
+
+<select id="getByParm_count" resultType="Integer">
+	select count(*)
+	LEFT JOIN user_profile up1 on nr.reply_user_id=up1.id
+	LEFT JOIN user_profile up2 on nr.reply_to_user_id=up2.id
+	where 1=1
+	<if test="parm.status != null">
+     	and nr.status = ${parm.status} 
+   	</if>
+   	<if test="parm.newsId != null">
+     	and nr.news_id = ${parm.newsId} 
+   	</if>
+   	<if test="parm.lastReplyId != null">
+     	and nr.id &lt; ${parm.lastReplyId} 
+   	</if>
+   	order by nr.id desc
+</select>
+<select id="getByParm" resultType="java.util.HashMap">
+	select nr.*, up1.user_nick as replyUserNick, up2.user_nick as replyToUserNick  from news_reply nr 
+	LEFT JOIN user_profile up1 on nr.reply_user_id=up1.id
+	LEFT JOIN user_profile up2 on nr.reply_to_user_id=up2.id
+	where 1=1 
+	<if test="parm.status != null">
+     	and nr.status = ${parm.status} 
+   	</if>
+   	<if test="parm.newsId != null">
+     	and nr.news_id = ${parm.newsId} 
+   	</if>
+   	<if test="parm.lastReplyId != null">
+     	and nr.id &lt; ${parm.lastReplyId} 
+   	</if>
+   	order by nr.id desc
+   	limit 10
+</select>
+
+<select id="getById" resultType="java.util.HashMap">
+	select nr.*, up1.user_nick as replyUserNick, up2.user_nick as replyToUserNick  from news_reply nr 
+	LEFT JOIN user_profile up1 on nr.reply_user_id=up1.id
+	LEFT JOIN user_profile up2 on nr.reply_to_user_id=up2.id
+	where nr.id = #{id}
+</select>
+
+</mapper>

@@ -1,0 +1,109 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="link icon-only back" id="backToMain">
+                <i class="icon icon-back"></i>
+            </a>
+        </div>
+        <div class="center newstitle sliding"></div>
+        <div class="right"> 
+        	<a href="#" class="link icon-only open-panel">
+        		<i class="icon icon-bars"></i>
+        	</a>
+        </div>
+    </div>
+</div>
+
+<div class="pages navbar-through">
+    <div data-page="userInfo" class="page">
+        <div class="page-content" id="userInfoContent">
+            <script id="userInfoTemplate" type="text/template">
+
+
+			<div class="list-block">
+                <ul>
+                  <li>
+					<a href="#" class="item-link item-content">
+                    	<div class="item-inner">
+                      		<div class="item-title">头像</div>
+							<div class="item-subtitle"><img src="{{userProfile.avatar}}" width="40" /></div>
+                    	</div>
+					</a>
+                  </li>
+                  <li>
+					<div class="item-content">
+                    	<div class="item-inner">
+                      		<div class="item-title">用户名</div>
+							<div class="item-subtitle">{{userProfile.usernick}}</div>
+                    	</div>
+					</div>
+                  </li>
+					<li>
+						<a href="#" class="item-link item-content">
+                    		<div class="item-inner">
+                      			<div class="item-title">二维码</div>
+								<div class="item-subtitle"></div>
+                    		</div>
+						</a>
+                  	</li>
+					<li>
+						<a href="#" class="item-link item-content sex">
+                    		<div class="item-inner">
+                      			<div class="item-title">性别</div>
+								<div class="item-subtitle sex-content">
+									{{#if userProfile.sex<2}}
+										男<img src="/img/icon/boy.png" width="18" />
+									{{else}}
+										女<img src="/img/icon/girl.png" width="18" />
+									{{/if}}	
+								</div>
+                    		</div>
+						</a>
+                  	</li>
+                </ul>
+                	<!-- <div class="list-block-label">List block label text goes here</div> -->
+              </div>
+
+
+
+<div class="login-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            		<div class="list-block">
+						  <ul>
+						    <li class="select-sex">
+						      <label class="label-radio item-content">
+						        <input type="radio" name="sex-radio" value="1">
+						        <div class="item-media">
+						          <img src="/img/icon/boy.png" width="18" />
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">男</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li class="select-sex">
+						      <label class="label-radio item-content">
+						        <input type="radio" name="sex-radio" value="2">
+						        <div class="item-media">
+						          <img src="/img/icon/girl.png" width="18" />
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">女</div>
+						        </div>
+						      </label>
+						    </li>
+						  </ul>
+						<a href="#" class="button button-big color-grey hide-screen">取消</a>
+					</div> 
+          </div>
+        </div>
+      </div>
+    </div>
+						  
+						
+            </script>
+        </div>
+    </div>
+</div>

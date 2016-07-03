@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>login</title>
+    <link rel="stylesheet" href="/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="/css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/icon.css">
+    <link rel="stylesheet" href="/css/framework7.material.min.css">
+    <link rel="stylesheet" href="/css/framework7.material.colors.min.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-55082724-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages">
+          <div data-page="login" class="page navbar-fixed">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="left"></div>
+                <div class="center">Sign In</div>
+                <div class="right"></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block center">
+                <p><a href="#" class=""> Welcome to my app</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="login-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Sign In</div>
+            <form>
+              <div class="list-block">
+                <ul>
+                  <li class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">用户名</div>
+                      <div class="item-input">
+                        <input type="text" name="usernick" placeholder="username">
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">密码</div>
+                      <div class="item-input">
+                        <input type="password" name="password" placeholder="password">
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="list-block">
+                <ul>
+                  <li><a href="#" class="button button-raised button-fill color-cyan login-bth">登录</a></li>
+                  <li><a href="#" class="item-link list-button regist-bth">注册</a></li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/libs/framework7.min.js"></script>
+    <script>
+      var myApp = new Framework7({
+    	  material: true
+      });
+      
+      var $$ = Dom7;
+      
+      myApp.loginScreen();
+      
+      $$('.login-bth').on('click',function(){
+    	  $$.ajax({    
+				 type: 'get',
+				 url: '/account/doLogin',    
+				 data: {
+					 usernick: $$('input[name="usernick"]').val(),
+					 password: $$('input[name="password"]').val()
+				 },    
+				 cache: false,    
+				 dataType: 'json',    
+				 success: function(data) {
+					 if (data.errorNo == 200) {
+						 window.location.href='/index.html';
+					 } else {
+						 myApp.alert(data.errorInfo, '友情提示');
+					 }
+				 }    
+			 });  
+      });
+      
+	  $$('.regist-bth').on('click',function(){
+		  window.location.href='regist.html';
+      });
+    </script>
+  </body>
+</html>

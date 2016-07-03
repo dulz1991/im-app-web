@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>regist</title>
+    <link rel="stylesheet" href="/css/framework7.ios.min.css">
+    <!-- <link rel="stylesheet" href="/css/framework7.ios.colors.min.css"> -->
+    <link rel="stylesheet" href="/css/framework7.material.min.css">
+    <link rel="stylesheet" href="/css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-55082724-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages">
+          <div data-page="home" class="page navbar-fixed">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="left"></div>
+                <div class="center">注册</div>
+                <div class="right"></div>
+              </div>
+            </div>
+            <div class="page-content">
+				            	
+				<a href="#" class="button button-big color-green signin-btn">去登陆</a>
+				
+              <div class="swiper-container">
+                <div class="swiper-wrapper">
+                <!-- 性别 -->
+                  <div class="swiper-slide">
+                  		<div class="content-block-title">性别注册</div>
+						<div class="list-block">
+						  <ul>
+						    <li>
+						      <label class="label-radio item-content">
+						        <!-- Checked by default -->
+						        <input type="radio" name="sex-radio" value="1">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">男</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="sex-radio" value="2">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">女</div>
+						        </div>
+						      </label>
+						    </li>
+						  </ul>
+						</div>   
+						<div class="list-block">
+			              	<ul>
+			                	<li><a href="#" class="item-link list-button next-btn">下一步</a></li>
+			              	</ul>
+			         	</div>
+				  </div>
+                <!-- 用户名密码 -->
+                  <div class="swiper-slide">
+			         <div class="content-block-title">用户名密码注册</div>
+		              <div class="list-block">
+		                <ul>
+		                  <li class="item-content">
+		                    <div class="item-inner">
+		                      <div class="item-title label">用户名</div>
+		                      <div class="item-input">
+		                        <input type="text" name="usernick" placeholder="username">
+		                      </div>
+		                    </div>
+		                  </li>
+		                  <li class="item-content">
+		                    <div class="item-inner">
+		                      <div class="item-title label">密码</div>
+		                      <div class="item-input">
+		                        <input type="password" name="password" placeholder="password">
+		                      </div>
+		                    </div>
+		                  </li>
+		                  <li class="item-content">
+		                    <div class="item-inner">
+		                      <div class="item-title label">确认密码</div>
+		                      <div class="item-input">
+		                        <input type="password" name="conformPassword" placeholder="password">
+		                      </div>
+		                    </div>
+		                  </li>
+		                </ul>
+		              </div>
+		              <div class="list-block">
+			              <ul>
+			              	<li><a href="#" class="item-link list-button prev-btn">上一步</a></li>
+			                <li><a href="#" class="item-link button-raised button-fill color-cyan list-button complete-btn">完成</a></li>
+			              </ul>
+			              <div class="list-block-label">
+			                <p>提示：用户名注册后将不能修改</p>
+			          	</div>
+			         </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <script type="text/javascript" src="/js/libs/framework7.min.js"></script>
+    <style>
+      .swiper-container {
+        height: 100%;
+      }
+      .swiper-slide {
+        background:#fff;
+      }
+      .swiper-slide span {
+        text-align:center;
+        display:block;
+        margin:20px;
+        font-size:21px;
+      }
+    </style>
+    <script>
+      var myApp = new Framework7({
+    	  material: true
+      }); 
+      
+      var $$ = Dom7;
+      
+      var mySwiper = myApp.swiper('.swiper-container', {
+        pagination:'.swiper-pagination',
+        direction:'vertical',
+        paginationClickable: true, //鼠标点击分页
+        nextButton: '.next-btn',
+        prevButton: '.prev-btn',
+      });
+      
+      $$('.complete-btn').click(function(){
+    	  var sex = $$('input[name="sex-radio"]:checked').val();
+    	  var usernick = $$('input[name="usernick"]').val();
+    	  var password = $$('input[name="password"]').val();
+    	  var conformPassword = $$('input[name="conformPassword"]').val();
+    	  $$.ajax({    
+				 type: 'get',
+				 url: '/account/doRegist',    
+				 data: {
+					 sex: sex,
+					 usernick: usernick,
+					 password: password,
+					 conformPassword: conformPassword
+				 },    
+				 cache: false,    
+				 dataType: 'json',    
+				 success: function(data) {
+					 if (data.errorNo == 200) {
+						 window.location.href='/index.html';
+					 } else {
+						 myApp.alert(data.errorInfo, '友情提示');
+					 }
+				 }    
+			 }); 
+      });
+      
+      $$('.signin-btn').click(function(){
+    	  window.location.href='signIn.html';
+      });
+    </script>
+  </body>
+</html>

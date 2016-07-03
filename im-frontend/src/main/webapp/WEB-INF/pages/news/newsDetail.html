@@ -1,0 +1,64 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="link icon-only back" id="backToMain">
+                <i class="icon icon-back"></i>
+            </a>
+        </div>
+        <div class="center newstitle sliding"></div>
+        <div class="right"> 
+        	<a href="#" class="link icon-only open-panel">
+        		<i class="icon icon-bars"></i>
+        	</a>
+        </div>
+    </div>
+</div>
+
+<div class="pages navbar-through">
+    <div data-page="newsDetail" class="page no-toolbar">
+        <div class="page-content infinite-scroll-reply" id="newsDetailContent">
+            <script id="newsDetailTemplate" type="text/template">
+				<input type="hidden" value="{{news.id}}" name="hidden_newsid" />
+				<input type="hidden" value="{{news.user_id}}" name="hidden_userid" />
+				<div class="card news-item">	
+					<div class="card-content">
+						<p style="padding:20px 20px 0px 20px;">{{news.news}}</p>
+					</div>
+					<div class="card-footer" style="color:#aaa;">
+						{{news.user_nick}} | {{news.create_str}} | 
+						<span class="chat"><a href="/pages/chat/chat.html?friendUserId={{news.user_id}}">聊天</a></span> | <span class="comment">评论</span>
+					</div>
+				</div>	
+				<div class="card comment-list">	
+					{{#each commentList}} 
+						<div class="card-footer comment-tetm" replyid={{id}}>
+							{{replyUserNick}} | {{reply_content}}
+						</div>
+					{{/each}}
+				</div>
+
+
+				<div class="picker-modal picker-info">
+    				<div class="toolbar">
+      					<div class="toolbar-inner">
+        					<div class="left"></div>
+        					<div class="right">
+								<a href="#" class="close-picker complete-input">完成</a>
+							</div>
+      					</div>
+    				</div>
+    				<div class="picker-modal-inner">
+      					<div class="content-block">
+        					<input type="text" class="item-input" name="comment" placeholder="回复:" value="" />
+      					</div>
+    				</div>
+  				</div>
+
+				<!-- 加载提示符 -->
+  				<div class="infinite-scroll-preloader not-display">
+    				<div class="preloader"></div>
+  				</div>	
+            </script>
+        </div>
+    </div>
+</div>

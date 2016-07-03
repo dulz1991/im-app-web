@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.NewsMapper">
+
+<resultMap type="com.im.app.base.bean.News" id="NewsBaseMapper">
+	<id property="id" column="id" />
+	<result property="userId" column="user_id" />
+	<result property="news" column="news" />
+	<result property="createTime" column="create_time" />
+	<result property="status" column="status" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert into news(user_id, news, create_time, status) 
+   	values(#{userId}, #{news}, now(), 1)  
+</insert>
+
+<update id="update">
+	update news set 
+	<if test="status != null">
+     	status = ${status},
+   	</if>
+   	update_time = now()
+   	where id = ${id}
+</update>
+
+
+<select id="getByParm_count" resultType="Integer">
+	select count(*) from news n 
+	LEFT JOIN user_profile up on n.user_id=up.id
+	where 1=1 
+	<if test="parm.status != null">
+     	and n.status = ${parm.status} 
+   	</if>
+   	<if test="parm.firstNewsId != null">
+     	and n.id &gt; ${parm.firstNewsId} 
+   	</if>
+   	<if test="parm.lastNewsId != null">
+     	and n.id &lt; ${parm.lastNewsId} 
+   	</if>
+   	order by n.id desc
+</select>
+<select id="getByParm" resultType="java.util.HashMap">
+	select n.*, up.user_nick from news n 
+	LEFT JOIN user_profile up on n.user_id=up.id
+	where 1=1 
+	<if test="parm.status != null">
+     	and n.status = ${parm.status} 
+   	</if>
+   	<if test="parm.firstNewsId != null">
+     	and n.id &gt; ${parm.firstNewsId} 
+   	</if>
+   	<if test="parm.lastNewsId != null">
+     	and n.id &lt; ${parm.lastNewsId} 
+   	</if>
+   	order by n.id desc
+   	limit 10
+</select>
+
+<select id="getById" resultType="java.util.HashMap">
+	select n.*, up.user_nick from news n 
+	LEFT JOIN user_profile up on n.user_id=up.id
+	where n.id = #{id}
+</select>
+
+</mapper>

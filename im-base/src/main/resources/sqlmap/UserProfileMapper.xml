@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.UserProfileMapper">
+
+<resultMap type="com.im.app.base.bean.UserProfile" id="UserProfileBaseMapper">
+	<id property="id" column="id" />
+	<result property="username" column="user_name" />
+	<result property="usernick" column="user_nick" />
+	<result property="password" column="password" />
+	<result property="phone" column="phone" />
+	<result property="email" column="email" />
+	<result property="avatar" column="avatar" />
+	<result property="sex" column="sex" />
+	<result property="birth" column="birth" />
+	<result property="userRoleId" column="user_role_id" />
+	<result property="createTime" column="create_time" />
+	<result property="updateTime" column="update_time" />
+	<result property="status" column="status" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert into user_profile(user_name, user_nick, password, phone, email, avatar, sex, birth, user_role_id, create_time, update_time, status) 
+   	values(#{username},#{usernick},#{password},#{phone},#{email},#{avatar},#{sex},#{birth},#{userRoleId},now(),now(),1)  
+</insert>
+
+<update id="update">
+	update user_profile set 
+	<if test="avatar != null and avatar != ''">
+     	avatar = #{avatar},
+   	</if>
+   	<if test="birth != null and birth != ''">
+     	birth = #{birth},
+   	</if>
+   	<if test="email != null and email != ''">
+      	email = #{email},
+   	</if>
+   	<if test="sex != null and sex != ''">
+      	sex = ${sex},
+   	</if>
+   	<if test="phone != null and phone != ''">
+      	phone = ${phone},
+   	</if>
+   	update_time = now()
+   	where id = ${id}
+</update>
+
+<sql id="Base_Column_List">
+	id,user_name, user_nick, phone, email,avatar, sex, 
+	birth, user_role_id, create_time, update_time, status
+</sql>
+
+<select id="getByParm_count" resultType="Integer">
+	select count(*) from user_profile where 1=1 
+	<if test="user.username != null and user.username != ''">
+     	and user_nick = #{user.username}
+   	</if>
+   	<if test="user.usernick != null and user.usernick != ''">
+     	and user_nick = #{user.usernick}
+   	</if>
+   	<if test="user.email != null and user.email != ''">
+      	and email = #{user.email}
+   	</if>
+   	<if test="user.phone != null and user.phone != ''">
+      	and phone = ${user.phone}
+   	</if>
+</select>
+<select id="getByParm" resultMap="UserProfileBaseMapper">
+	select <include refid="Base_Column_List" /> 
+	from user_profile where 1=1 
+	<if test="user.username != null and user.username != ''">
+     	and user_nick = #{user.username}
+   	</if>
+   	<if test="user.usernick != null and user.usernick != ''">
+     	and user_nick = #{user.usernick}
+   	</if>
+   	<if test="user.email != null and user.email != ''">
+      	and email = #{user.email}
+   	</if>
+   	<if test="user.phone != null and user.phone != ''">
+      	and phone = ${user.phone}
+   	</if>
+   	order by id desc
+   	limit ${page.pageNum},${page.pageSize}
+</select>
+
+<select id="getById" resultMap="UserProfileBaseMapper">
+	select <include refid="Base_Column_List" /> 
+	from user_profile where id = #{id}
+</select>
+
+<select id="findUserByUsernameAndPassword" resultMap="UserProfileBaseMapper">
+	select <include refid="Base_Column_List" /> 
+	from user_profile where user_nick=#{user.usernick} and password=#{user.password}
+</select>
+
+<select id="getByUsernick" resultMap="UserProfileBaseMapper">
+	select <include refid="Base_Column_List" /> 
+	from user_profile where user_nick = #{usernick}
+</select>
+
+<select id="findByIdsMap" resultMap="UserProfileBaseMapper">  
+ 	Select <include refid="Base_Column_List" />  
+ 	from user_profile where id in  
+ 	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+  		#{item} 
+ 	</foreach>  
+</select>  
+
+
+</mapper>
