@@ -1,5 +1,5 @@
 //删除h5本地存储
-var localStorage = window.localStorage;
+/*var localStorage = window.localStorage;*/
 
 function clearLocalStorage(key) {
 	if(localStorage){
@@ -15,8 +15,12 @@ function clearLocalStorage(key) {
     }
 }
 
-function getLocalStorageByKey() {
-	return localStorage.getItem("chat_list");
+function getLocalStorageByKey(key) {
+	return localStorage.getItem(key);
+}
+
+function setLocalStorage(key, value) {
+	return localStorage.getItem(key,value);
 }
 
 function updateLocalStorageChatList(value) {

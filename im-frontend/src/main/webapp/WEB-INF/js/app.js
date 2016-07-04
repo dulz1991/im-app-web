@@ -3,8 +3,8 @@ require.config({
     paths: {
     	Framework7: '/js/libs/framework7.min',
     	router: '/js/router',
-    	LS: '/js/localStorage',
-    	GS: '/js/globalService'
+    	GS: '/js/globalService',
+    	WS: '/js/websocket'
     },
     shim: {
         Framework7: {
@@ -13,12 +13,12 @@ require.config({
     }
 })
 
-require(['Framework7', 'router'], function (Framework7, Router) {
+require(['Framework7', 'router','WS'], function (Framework7, Router) {
 	// Initialize your myApp
 	window.myApp = new Framework7({
 		
 	});
-
+	
 	// Export selectors engine
 	window.$$ = window.Dom7;
 	

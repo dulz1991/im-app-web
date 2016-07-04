@@ -1,4 +1,4 @@
-define(['views/newsView','utils'], function (View,utils) {
+define(['views/newsView','utils'], function (View,utils,WS) {
 
 	var _id;
 	

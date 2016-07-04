@@ -1,8 +1,8 @@
-define(['views/chatListView','LS'], function (View,LS) {
+define(['views/chatListView','GS'], function (View,GS) {
 
     function init(query) {
         myApp.showIndicator();
-        var chatList = getLocalStorageByKey('chat_list');
+        var chatList = GS.getLocalStorageByKey('chat_list');
         View.render({
             model: chatList
         });

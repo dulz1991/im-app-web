@@ -1,47 +1,37 @@
 define([], function () {
-    var $CONFIG = null;
     init();
-
+    var ls = window.localStorage;
+   
     function init() {
-        if (!$CONFIG) {
-            $CONFIG = {};
-            $CONFIG.currentUser = {};
-
-            if (localStorage.getItem('user')) {
-                $CONFIG.currentUser = JSON.parse(localStorage.getItem('user'));
-            }
-
-            if (localStorage.getItem('sid')) {
-                $CONFIG.currentUser.sid = localStorage.getItem('sid');
-            }
-        }
     }
 
     function getCurrentUser() {
-        return $CONFIG.currentUser;
+    	var curentUser = null;
+    	$.ajax({
+            url: '/account/getCurrentUser',
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+            	if (data.errorNo==200) {
+            		curentUser = data.user;
+            	}
+            }
+        });
+    	return curentUser;
     }
-
-    function getSid() {
-        var m = $$.parseUrlQuery(window.location.href || '');
-        return m.sid || localStorage.getItem('sid');
-    }
-
-    function setCurrentUser(sid, user) {
-        $CONFIG.currentUser = user;
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('sid', sid);
-    }
-
-    function removeCurrentUser() {
-        $CONFIG.currentUser = {};
-        localStorage.removeItem('user');
-        localStorage.removeItem('sid');
+    
+    function getCurrentUserId() {
+    	var curentUser = getCurrentUser();
+    	if(curentUser!=null || curentUser!=undefined){
+    		return curentUser.id;
+    	}
+    	return null;
     }
 
     function isLogin() {
-    	var allcookies = document.cookie;  
-    	var cookie_pos = allcookies.indexOf("_user");   //索引的长度  
-    	if(cookie_pos>-1){
+    	var currentUserId = getCurrentUserId(); 
+    	if(currentUserId != null || currentUserId != undefined){
     		return true;
     	}else{
     		return false;
@@ -79,12 +69,62 @@ define([], function () {
 
 
     return {
-        getSid: getSid,
-        getCurrentUser: getCurrentUser,
-        setCurrentUser: setCurrentUser,
-        removeCurrentUser: removeCurrentUser,
         isLogin: isLogin,
         logout: logout,
-        checkUpdate: checkUpdate
+        checkUpdate: checkUpdate,
+        getCurrentUserId: getCurrentUserId,
+        getLocalStorageByKey: getLocalStorageByKey,
+        setLocalStorage: setLocalStorage,
+        clearLocalStorage: clearLocalStorage,
+        updateLocalStorageChatList: updateLocalStorageChatList
     };
+    
+    function clearLocalStorage(key) {
+    	if(ls){
+        	if(key==''||key==null||key==undefined){
+        		ls.clear();
+        		alert("删除成功");
+        	} else {
+        		ls.removeItem(key);
+        		alert("删除成功");
+        	}
+        } else {
+        	alert('This browser does NOT support localStorage');
+        }
+    }
+
+    function getLocalStorageByKey(key) {
+    	return ls.getItem(key);
+    }
+
+    function setLocalStorage(key, value) {
+    	ls.setItem(key,value);
+    }
+
+    function updateLocalStorageChatList(value) {
+    	var flag = false;
+    	var jsonArr;
+    	//获取本地存储chat_list
+    	var jsonStr =  JSON.parse(getLocalStorageByKey("chat_list"));
+    	//是否存在数据
+    	if (jsonStr != null) {
+    		$.each(jsonStr,function(index) {
+    			if (jsonStr[index].userId == value.userId) {
+    				jsonStr[index].message = value.message;
+    				jsonStr[index]._createTimeStr = new Date().format("yyyy-MM-dd HH:mm:ss");
+    				flag = true;
+    				return false;
+    			}
+    		});
+    		if (!flag) {
+    			jsonStr.push(value);
+    			localStorage.setItem("chat_list", JSON.stringify(jsonStr));
+    		}
+    	} else {
+    		jsonStr = [];
+    		jsonStr.push(value);
+    		localStorage.setItem("chat_list", JSON.stringify(jsonStr));
+    	}
+    }
+    
 });

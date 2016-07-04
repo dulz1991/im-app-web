@@ -1,20 +1,19 @@
-define(['views/chatRoomView'], function (View) {
+define(['views/chatRoomView','WS'], function (View,WS) {
 
+	var friendUserId;
+	
 	var bindings = [{
-		element: '.btn-chat',
+		element: '.btn-send',
         event: 'click',
-        handler: gotoChat
-	},{
-		element: '.btn-delete',
-        event: 'click',
-        handler: doDelete
+        handler: sendMsg
 	}];
 
     function init(query) {
         myApp.showIndicator();
+        friendUserId = query.friendUserId;
         $$.ajax({
             url: '/auth/chat/chatRoom',
-            data: {friendUserId:query.friendUserId},
+            data: {friendUserId:friendUserId},
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -31,12 +30,9 @@ define(['views/chatRoomView'], function (View) {
         init: init
     };
     
-    function gotoChat() {
-    	
-    }
-    
-    function doDelete() {
-    	
+    function sendMsg() {
+    	var msg = $$('.msg').val();
+    	WS.sendMessage(friendUserId,msg);
     }
     
     

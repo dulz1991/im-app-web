@@ -20,36 +20,24 @@
             <script id="chatRoomTemplate" type="text/template">
 
               <div class="messages messages-auto-layout">
-                <div class="messages-date">Sunday, Feb 9 <span>12:58</span></div>
+                
+				<div class="messages-date">Sunday, Feb 9 <span>12:58</span></div>
+
                 <div class="message message-sent message-first">
                   <div class="message-text">Hello</div>
                 </div>
-                <div class="message message-sent message-last message-with-tail">
-                  <div class="message-text">How are you?</div>
-                </div>
+
                 <div class="message message-received message-with-avatar message-last message-with-tail message-first">
                   <div class="message-name">Kate</div>
                   <div class="message-text">I am fine, thanks</div>
-                  <div style="background-image:url()" class="message-avatar"></div>
+                  <div style="background-image:url(/img/icon/boy.png)" class="message-avatar"></div>
                 </div>
-                <div class="messages-date">Sunday, Feb 3 <span>11:58</span></div>
-                <div class="message message-sent message-first">
-                  <div class="message-text">Nice photo?</div>
-                </div>
-                <div class="message message-sent message-pic message-last message-with-tail">
-                  <div class="message-text"><img src=""></div>
-                  <div class="message-label">Delivered</div>
-                </div>
-                <div class="message message-received message-with-avatar message-last message-with-tail message-first">
-                  <div class="message-name">Kate</div>
-                  <div class="message-text">Wow, awesome!</div>
-                  <div style="background-image:url()" class="message-avatar"></div>
-                </div>
+            
               </div>
 
 			<div class="toolbar messagebar">
               <div class="toolbar-inner">
-                <textarea placeholder="Message"></textarea><a href="#" class="link">Send</a>
+                <textarea class="msg" placeholder="Message"></textarea><a href="#" class="link btn-send">发送</a>
               </div>
             </div>
             </script>

@@ -117,4 +117,23 @@ public class AccountController {
 		return doLogin(user, response);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/getCurrentUser", method=RequestMethod.GET)
+	public Map<String, Object> getCurrentUser(HttpServletRequest request) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
+		UserProfile userProfile = null;
+		try {
+			String value = CookieUtil.getCookie(CommonConstant.COOKIE_USER, request);
+			if(StringUtils.isNotBlank(value)){
+				ObjectMapper mapper = new ObjectMapper();
+				userProfile = mapper.readValue(value, UserProfile.class);
+				resMap.put(CommonConstant.ERROR_NO, CommonConstant.ERROR_200);
+				resMap.put("user", userProfile);
+			}
+		} catch (IOException e) {
+			resMap.put(CommonConstant.ERROR_NO, CommonConstant.ERROR_500);
+		}
+		return resMap;
+	}
+
 }
