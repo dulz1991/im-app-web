@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.MessageMapper">
+
+<resultMap type="com.im.app.base.bean.Message" id="MessageBaseMapper">
+	<id property="id" column="id" />
+	<result property="sendUserId" column="send_user_id" />
+	<result property="receiveUserId" column="receive_user_id" />
+	<result property="message" column="message" />
+	<result property="createTime" column="create_time" />
+	<result property="chatRoomId" column="chat_room_id" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert into message(send_user_id, receive_user_id, message, create_time,chat_room_id) 
+   	values(#{sendUserId}, #{receiveUserId},#{message}, now(),#{chatRoomId})  
+</insert>
+
+<select id="getByParm" resultType="java.util.HashMap">
+	select m.*, mup.user_nick, fup.user_nick 
+	from message m
+	LEFT JOIN user_profile mup on m.send_user_id=mup.id
+	LEFT JOIN user_profile fup on m.receive_user_id=fup.id
+	where 1=1 and
+	<if test="parm.sendUserId!=null">
+		m.send_user_id=${parm.sendUserId}
+	</if>
+	<if test="parm.receiveUserId!=null">
+		m.receive_user_id=${parm.receiveUserId}
+	</if>
+	<if test="parm.chatRoomId!=null">
+		m.chat_room_id=${parm.chatRoomId}
+	</if>
+   	order by m.id desc
+   	limit 5
+</select>
+
+<select id="getByChatRoomId" resultType="java.util.HashMap">
+	select m.*, mup.user_nick, fup.user_nick 
+	from message m
+	LEFT JOIN user_profile mup on m.send_user_id=mup.id
+	LEFT JOIN user_profile fup on m.receive_user_id=fup.id
+	where chat_room_id=${chatRoomId}
+   	order by m.id desc
+   	limit 5
+</select>
+
+</mapper>

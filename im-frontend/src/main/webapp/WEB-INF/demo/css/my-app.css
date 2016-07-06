@@ -1,0 +1,43 @@
+/* Your app custom files in this file */
+/* Tab bar icons */
+i.tabbar-demo-icon-1 {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/home.png");
+}
+.active i.tabbar-demo-icon-1 {
+  background-image: url("../img/home1.png");
+}
+i.tabbar-demo-icon-2 {
+  width: 25px;
+  height: 30px;
+  background-image: url("../img/cart.png");
+}
+.active i.tabbar-demo-icon-2 {
+  background-image: url("../img/cart1.png");
+}
+i.tabbar-demo-icon-3 {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/friend.png");
+}
+.active i.tabbar-demo-icon-3 {
+  background-image: url("../img/friend1.png");
+}
+i.tabbar-demo-icon-4 {
+  width: 25px;
+  height: 30px;
+  background-image: url("../img/people.png");
+}
+.active i.tabbar-demo-icon-4 {
+  background-image: url("../img/people1.png");
+}
+i.tabbar-demo-icon-5 {
+  width: 30px;
+  height: 30px;
+  background-image: url("../img/token.png");
+}
+.active i.tabbar-demo-icon-5 {
+  background-image: url("../img/token1.png");
+}
+

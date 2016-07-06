@@ -1,4 +1,4 @@
-define(['views/settingView'], function (View) {
+define(['views/settingView','GS'], function (View,GS) {
 
 	var bindings = [{
 		element: '.logout',
@@ -45,11 +45,11 @@ define(['views/settingView'], function (View) {
     }
     
     function chearChat() {
-    	
+    	GS.clearLocalStorage('chat_list');
     }
 
 	function clearCache() {
-	
+		GS.clearLocalStorage();
 	}
     
 });

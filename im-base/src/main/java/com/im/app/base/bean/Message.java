@@ -8,7 +8,9 @@ public class Message extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 2L;
 	
 	private Long id;
-	private Long userId;
+	private Long sendUserId;
+	private Long receiveUserId;
+	private Long chatRoomId;
 	private String message;
 	private Date createTime;
 	
@@ -17,12 +19,6 @@ public class Message extends BaseEntity implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 	public Date getCreateTime() {
 		return createTime;
@@ -36,7 +32,24 @@ public class Message extends BaseEntity implements Serializable{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+	public Long getSendUserId() {
+		return sendUserId;
+	}
+	public void setSendUserId(Long sendUserId) {
+		this.sendUserId = sendUserId;
+	}
+	public Long getReceiveUserId() {
+		return receiveUserId;
+	}
+	public void setReceiveUserId(Long receiveUserId) {
+		this.receiveUserId = receiveUserId;
+	}
+	public Long getChatRoomId() {
+		return chatRoomId;
+	}
+	public void setChatRoomId(Long chatRoomId) {
+		this.chatRoomId = chatRoomId;
+	}
 	
 	
 }

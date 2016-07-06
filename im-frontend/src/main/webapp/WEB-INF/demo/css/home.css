@@ -1,0 +1,45 @@
+.search {
+	display:block;
+	background: #007aff;
+	color: #fff;
+	width: 90%;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+    margin-left: 42px;
+}
+.search-div{
+	width: 100%;
+}
+.sliding{
+	width: 90%;
+}
+i.found1 {
+	
+	width: 30px;
+	height: 30px;
+	background-image: url("../img/found.png");
+    float: left;
+    left: 75px;
+}
+i.tao {
+	width: 30px;
+	height: 30px;
+	background-image: url("../img/tao.png");
+	float: left;
+	margin-left: 5px;
+	
+}
+.swiper-container {
+        height: 20%;
+        border:1px solid #aaa;
+      }
+      .swiper-slide {
+        background:#fff;
+      }
+      .swiper-slide span {
+        text-align:center;
+        display:block;
+        margin:20px;
+        font-size:21px;
+      }

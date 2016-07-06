@@ -21,16 +21,16 @@
 				{{#if chatList}}
 				<div class="list-block media-list">
                 	<ul>
-						{{#each friends}}
+						{{#each chatList}}
                   		<li>
-							<a href="/pages/friend/chat.html?friendUserId={{friendUserId}}" class="item-link item-content">
-                      			<div class="item-media"><img src="{{avatar}}" width="80"></div>
+							<a href="/pages/chat/chat.html?friendUserId={{userId}}" class="item-link item-content">
+                      			<div class="item-media"><img src="{{_avatar}}" width="40"></div>
                       			<div class="item-inner">
                         			<div class="item-title-row">
-                          				<div class="item-title">{{usernick}}</div>
+                          				<div class="item-title">{{_username}}</div>
                         			</div>
 									<div class="item-subtitle"></div>
-                        			<div class="item-text" style="height:24px;">个人说明</div>
+                        			<div class="item-text" style="height:24px;">{{message}}</div>
                       			</div>	
 							</a>
 						</li>

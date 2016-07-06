@@ -83,10 +83,10 @@ define([], function () {
     	if(ls){
         	if(key==''||key==null||key==undefined){
         		ls.clear();
-        		alert("删除成功");
+        		myApp.alert('删除成功','提示');
         	} else {
         		ls.removeItem(key);
-        		alert("删除成功");
+        		myApp.alert('删除成功','提示');
         	}
         } else {
         	alert('This browser does NOT support localStorage');
@@ -103,27 +103,27 @@ define([], function () {
 
     function updateLocalStorageChatList(value) {
     	var flag = false;
-    	var jsonArr;
     	//获取本地存储chat_list
-    	var jsonStr =  JSON.parse(getLocalStorageByKey("chat_list"));
+    	var jsonObj =  JSON.parse(getLocalStorageByKey("chat_list"));
     	//是否存在数据
-    	if (jsonStr != null) {
-    		$.each(jsonStr,function(index) {
-    			if (jsonStr[index].userId == value.userId) {
-    				jsonStr[index].message = value.message;
-    				jsonStr[index]._createTimeStr = new Date().format("yyyy-MM-dd HH:mm:ss");
+    	if (jsonObj) {
+    		$$.each(jsonObj.chatList, function(index, json) {
+    			if (json.userId == value.userId) {
+    				json.message = value.message;
+    				json._createTimeStr = new Date().format("yyyy-MM-dd HH:mm:ss");
     				flag = true;
-    				return false;
+    				localStorage.setItem("chat_list", JSON.stringify(jsonObj));
+    				return;
     			}
     		});
     		if (!flag) {
-    			jsonStr.push(value);
-    			localStorage.setItem("chat_list", JSON.stringify(jsonStr));
+    			jsonObj.chatList.push(value);
+    			localStorage.setItem("chat_list", JSON.stringify(jsonObj));
     		}
     	} else {
-    		jsonStr = [];
-    		jsonStr.push(value);
-    		localStorage.setItem("chat_list", JSON.stringify(jsonStr));
+    		jsonObj = {"chatList":[]};
+    		jsonObj.chatList.push(value);
+    		localStorage.setItem("chat_list", JSON.stringify(jsonObj));
     	}
     }
     

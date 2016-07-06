@@ -12,6 +12,7 @@ define(['GS'], function (GS) {
 
         $$('#view-chat').on('show', function () {
         	viewChat.reloadPage('/pages/chat/index.html');
+        	$$('.tab-link span.bg-red').text('');
         });
 
         $$('#view-friend').on('show', function () {

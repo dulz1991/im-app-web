@@ -26,7 +26,10 @@
 					</div>
 					<div class="card-footer" style="color:#aaa;">
 						{{news.user_nick}} | {{news.create_str}} | 
-						<span class="chat"><a href="/pages/chat/chat.html?friendUserId={{news.user_id}}">聊天</a></span> | <span class="comment">评论</span>
+						{{#if isChat}}
+						<span class="chat"><a href="/pages/chat/chat.html?friendUserId={{news.user_id}}">聊天</a></span> | 
+						{{/if}}
+						<span class="comment">评论</span>
 					</div>
 				</div>	
 				<div class="card comment-list">	

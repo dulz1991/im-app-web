@@ -21,7 +21,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.im.app.base.bean.Message;
 import com.im.app.base.bean.UserProfile;
 import com.im.app.base.common.CommonConstant;
+import com.im.app.base.service.MessageService;
 import com.im.app.base.service.UserProfileService;
+import com.im.app.base.servicebean.MessageServiceBean;
 import com.im.app.base.servicebean.UserProfileServiceBean;
 import com.im.app.base.util.DateUtil;
 import com.im.app.base.util.SpringContextUtil;
@@ -38,6 +40,7 @@ public class IMWebSocket {
     private static Map<Long, IMWebSocket> webSocketMap = new HashMap<Long, IMWebSocket>();
     
     private static UserProfileService userProfileService;
+    private static MessageService messageService;
     
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
@@ -46,6 +49,9 @@ public class IMWebSocket {
     	Map<String, Object> map = new LinkedHashMap<String, Object>();
     	map = (Map<String, Object>) SpringContextUtil.getBean(UserProfileServiceBean.class);
     	userProfileService = (UserProfileService) map.get("userProfileServiceBean");
+    	map.clear();
+    	map = (Map<String, Object>) SpringContextUtil.getBean(MessageServiceBean.class);
+    	messageService = (MessageService) map.get("messageServiceBean");
     }
      
     /**
@@ -133,7 +139,13 @@ public class IMWebSocket {
      */
     public void sendMessage(String message, Long friendUserId, Long currentUserId, int friendFlag) throws IOException, EncodeException{
     	Message msg = new Message();
-		msg.setUserId(currentUserId);
+    	if (friendFlag == 1) {
+    		msg.setSendUserId(currentUserId);
+    		msg.setReceiveUserId(friendUserId);
+    	} else {
+    		msg.setSendUserId(friendUserId);
+    		msg.setReceiveUserId(currentUserId);
+    	}
 		UserProfile userProfile = userProfileService.getById(currentUserId);
 		msg.set_avatar(userProfile.getAvatar());
 		msg.set_username(userProfile.getUsernick());
@@ -142,6 +154,8 @@ public class IMWebSocket {
     	msg.setCreateTime(date);
     	msg.set_createTimeStr(DateUtil.dateToString(date, CommonConstant.DATE_FORMATE_1));
     	msg.set_friendFlag(friendFlag);
+    	
+    	messageService.insert(msg);
     	
     	ObjectMapper mapper = new ObjectMapper();
     	String msg2Json = mapper.writeValueAsString(msg);

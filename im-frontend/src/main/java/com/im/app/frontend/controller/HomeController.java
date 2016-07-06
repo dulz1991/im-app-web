@@ -48,6 +48,11 @@ public class HomeController extends BaseController {
 		Map<String, Object> news =  newsService.getById(id);
 		news = new NewsConverter().MapConverter(news);
 		resMap.put("news", news);
+		if(news.get("user_id").equals(this.getCurrentUserId())){
+			resMap.put("isChat", false);	
+		} else {
+			resMap.put("isChat", true);
+		}
 		List<Map<String, Object>> commentList = getcomments(id);
 		resMap.put("commentList", commentList);
 		return resMap;
