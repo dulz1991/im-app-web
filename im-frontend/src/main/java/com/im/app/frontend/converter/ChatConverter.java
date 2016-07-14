@@ -1,5 +1,7 @@
 package com.im.app.frontend.converter;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,12 @@ public class ChatConverter {
 				map.put("me", false);
 			}
 		}
+		 Collections.sort(list, new Comparator<Map<String, Object>>() {
+	            public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+	                return (Long) o1.get("id") > (Long) o2.get("id") ? 
+	                		((Long) o1.get("id") == (Long) o2.get("id") ? 0 : 1) : -1;
+	            }
+	        });
 		return list;
 	}
 	

@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="left">
             <a href="#" class="link icon-only back" id="backToMain">
-                <i class="icon icon-back"></i>
+                <i class="icon icon-back"></i> 朋友
             </a>
         </div>
         <div class="center newstitle sliding"></div>
@@ -18,6 +18,31 @@
     <div data-page="friend" class="page">
         <div class="page-content infinite-scroll-reply" id="friendContent">
             <script id="friendTemplate" type="text/template">
+
+				<div class="list-block">
+  					<ul>
+						<li>
+      						<a href="/pages/friend/newFriend.html" class="item-link item-content new-friend">
+        						<div class="item-media"><i class="icon icon-add-friend"></i></div>
+        						<div class="item-inner">
+          							<div class="item-title">新的朋友</div>
+          							<div class="item-after"></div>
+        						</div>
+      						</a>
+    					</li>
+    					<li>
+      						<a href="/pages/friend/search.html" class="item-link item-content lookfor-friend">
+        						<div class="item-media"><i class="icon icon-add-user"></i></div>
+        						<div class="item-inner">
+          							<div class="item-title">查找好友</div>
+          							<div class="item-after"></div>
+        						</div>
+      						</a>
+    					</li>
+  					</ul>
+  					<div class="list-block-label"></div>
+				</div>
+
 				<div class="list-block media-list friend-list">
                 	<ul>
 						{{#each friends}}
@@ -29,7 +54,7 @@
                           				<div class="item-title">{{usernick}}</div>
                         			</div>
 									<div class="item-subtitle"></div>
-                        			<div class="item-text" style="height:24px;">个人说明</div>
+                        			<div class="item-text" style="height:24px;">{{personalNote}}</div>
                       			</div>	
 							</a>
 						</li>

@@ -16,5 +16,7 @@ public interface UserRelationService {
 	Integer getByParm_count(UserRelation userRelation);
 	
 	UserRelation getById(Long id);
+	
+	boolean isFriend(Long currentUserId, Long friendUserId);
 
 }

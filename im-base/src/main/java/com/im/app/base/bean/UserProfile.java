@@ -20,6 +20,7 @@ public class UserProfile extends BaseEntity implements Serializable{
 	private String avatar;
 	private String birth;
 	private Integer status;
+	private String personalNote;
 	
 	public Long getId() {
 		return id;
@@ -129,6 +130,12 @@ public class UserProfile extends BaseEntity implements Serializable{
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+	public String getPersonalNote() {
+		return personalNote;
+	}
+	public void setPersonalNote(String personalNote) {
+		this.personalNote = personalNote;
 	}
 	
 

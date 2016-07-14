@@ -20,7 +20,7 @@
 </insert>
 
 <select id="getByParm" resultType="java.util.HashMap">
-	select m.*, mup.user_nick, fup.user_nick 
+	select m.*, mup.user_nick as my_usernick, fup.user_nick as friend_usernick 
 	from message m
 	LEFT JOIN user_profile mup on m.send_user_id=mup.id
 	LEFT JOIN user_profile fup on m.receive_user_id=fup.id
@@ -35,17 +35,17 @@
 		m.chat_room_id=${parm.chatRoomId}
 	</if>
    	order by m.id desc
-   	limit 5
+   	limit 6
 </select>
 
 <select id="getByChatRoomId" resultType="java.util.HashMap">
-	select m.*, mup.user_nick, fup.user_nick 
+	select m.*, mup.user_nick as my_usernick, fup.user_nick as friend_usernick,mup.avatar as my_avatar, fup.avatar as friend_avatar
 	from message m
 	LEFT JOIN user_profile mup on m.send_user_id=mup.id
 	LEFT JOIN user_profile fup on m.receive_user_id=fup.id
 	where chat_room_id=${chatRoomId}
    	order by m.id desc
-   	limit 5
+   	limit 6
 </select>
 
 </mapper>

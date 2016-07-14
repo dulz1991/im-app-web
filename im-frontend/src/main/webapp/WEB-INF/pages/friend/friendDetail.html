@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="left">
             <a href="#" class="link icon-only back" id="backToMain">
-                <i class="icon icon-back"></i>
+                <i class="icon icon-back"></i> 详情
             </a>
         </div>
         <div class="center newstitle sliding"></div>
@@ -20,7 +20,7 @@
             <script id="friendDetailTemplate" type="text/template">
 					
 						<div class="card">
-  							<div class="card-header">朋友资料:</div>
+  							<div class="card-header">TA的资料:</div>
   							<div class="card-content">
     							<div class="list-block media-list">
       								<ul>
@@ -39,7 +39,7 @@
 																{{/if}}	
 													</div>
             									</div>
-            									<div class="item-subtitle">个人说明</div>
+            									<div class="item-subtitle">{{userProfile.personalNote}}</div>
           									</div>
         								</li>
       								</ul>
@@ -48,10 +48,14 @@
 						</div>    
 						
 						<div class="card" style="background-color:rgba(0,0,0,0);border-radius:4px;box-shadow: 0 0px 0px rgba(0,0,0,0);">
-							<br>
-							<a href="/pages/chat/chat.html?friendUserId={{userProfile.id}}" class="button button-big button-fill button-raised color-green btn-chat">聊天</a>
-							<br>
-							<a href="#" class="button button-big button-fill button-raised color-pink btn-delete">删除</a>						
+							{{#if isFriend}}
+								<br>
+								<a href="/pages/chat/chat.html?friendUserId={{userProfile.id}}" class="button button-big button-fill button-raised color-green btn-chat">聊天</a>
+								<br>
+								<a href="#" class="button button-big button-fill button-raised color-pink btn-delete">删除</a>
+							{{else}}
+								<a href="#" class="button button-big button-fill button-raised color-teal btn-newfriend" frienduserid={{userProfile.id}}>加好友</a>
+							{{/if}}		
 						</div>
 
             </script>

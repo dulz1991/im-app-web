@@ -8,6 +8,10 @@ define(['views/friendDetailView'], function (View) {
 		element: '.btn-delete',
         event: 'click',
         handler: doDelete
+	},{
+		element: '.btn-newfriend',
+        event: 'click',
+        handler: addNewFriend
 	}];
 
     function init(query) {
@@ -39,5 +43,19 @@ define(['views/friendDetailView'], function (View) {
     	
     }
     
+    function addNewFriend(){
+    	var friendUserId = $$(this).attr("frienduserid");
+    	$$.ajax({
+            url: '/auth/friend/addNewFriend',
+            type: 'GET',
+            data: {friendUserId:friendUserId},
+            dataType: 'json',
+            success: function (data) {
+            	if(data.errorNo==200){
+            		myApp.alert('发送请求成功, 请等待对方回应!', '提示');
+            	}
+            }
+        });
+    }
     
 });

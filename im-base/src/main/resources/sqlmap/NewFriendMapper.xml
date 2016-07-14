@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.im.app.base.mybatis.mapper.NewFriendMapper">
+
+<resultMap type="com.im.app.base.bean.NewFriend" id="NewFriendBaseMapper">
+	<id property="id" column="id" />
+	<result property="requestUserId" column="request_user_id" />
+	<result property="targetUserId" column="target_user_id" />
+	<result property="createTime" column="create_time" />
+	<result property="updateTime" column="update_time" />
+	<result property="status" column="status" />
+</resultMap>  
+
+<insert id="insert">
+	<selectKey resultType="long" keyProperty="id">  
+   		select LAST_INSERT_ID()
+   	</selectKey>
+   	insert new_friend into (request_user_id, target_user_id, create_time,update_time, status) 
+   	values(#{requestUserId}, #{targetUserId}, now(),now(), 1)  
+</insert>
+
+<update id="update">
+	update new_friend set 
+	<if test="status != null">
+     	status = ${status},
+   	</if>
+   	update_time = now()
+   	where id = ${id}
+</update>
+
+
+<select id="getByParm_count" resultType="Integer">
+	select count(*)
+ from new_friend nf 
+LEFT JOIN user_profile up1 on up1.id=nf.request_user_id
+LEFT JOIN user_profile up2 on up2.id=nf.target_user_id
+	where 1=1 
+	<if test="parm.status != null">
+     	and nf.status = ${parm.status} 
+   	</if>
+   	<if test="parm.requestUserId != null">
+     	and nf.request_user_id = ${parm.requestUserId} 
+   	</if>
+   	<if test="parm.targetUserId != null">
+     	and nf.target_user_id = ${parm.targetUserId} 
+   	</if>
+</select>
+<select id="getByParm" resultType="java.util.HashMap">
+	select nf.id,nf.request_user_id,nf.target_user_id, nf.create_time,nf.update_time,nf.`status`,
+up1.avatar as req_avatar,up1.user_nick as req_user_nick,
+up2.avatar,up2.user_nick
+ from new_friend nf 
+LEFT JOIN user_profile up1 on up1.id=nf.request_user_id
+LEFT JOIN user_profile up2 on up2.id=nf.target_user_id
+	where 1=1 
+	<if test="parm.status != null">
+     	and nf.status = ${parm.status} 
+   	</if>
+   	<if test="parm.requestUserId != null">
+     	and nf.request_user_id = ${parm.requestUserId} 
+   	</if>
+   	<if test="parm.targetUserId != null">
+     	and nf.target_user_id = ${parm.targetUserId} 
+   	</if>
+   	order by nf.id desc
+</select>
+
+<select id="getById" resultType="java.util.HashMap">
+	select nf.id,nf.request_user_id,nf.target_user_id, nf.create_time,nf.update_time,nf.`status`,
+up1.avatar as req_avatar,up1.user_nick as req_user_nick,
+up2.avatar,up2.user_nick
+ from new_friend nf 
+LEFT JOIN user_profile up1 on up1.id=nf.request_user_id
+LEFT JOIN user_profile up2 on up2.id=nf.target_user_id
+	where nf.id = ${id}
+</select>
+
+</mapper>

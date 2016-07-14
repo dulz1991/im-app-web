@@ -16,6 +16,7 @@
 	<result property="createTime" column="create_time" />
 	<result property="updateTime" column="update_time" />
 	<result property="status" column="status" />
+	<result property="personalNote" column="personal_note" />
 </resultMap>  
 
 <insert id="insert">
@@ -37,11 +38,14 @@
    	<if test="email != null and email != ''">
       	email = #{email},
    	</if>
-   	<if test="sex != null and sex != ''">
+   	<if test="sex != null">
       	sex = ${sex},
    	</if>
    	<if test="phone != null and phone != ''">
       	phone = ${phone},
+   	</if>
+   	<if test="personalNote != null and personalNote != ''">
+      	personal_note = #{personalNote},
    	</if>
    	update_time = now()
    	where id = ${id}
@@ -49,7 +53,7 @@
 
 <sql id="Base_Column_List">
 	id,user_name, user_nick, phone, email,avatar, sex, 
-	birth, user_role_id, create_time, update_time, status
+	birth, user_role_id, create_time, update_time, status,personal_note
 </sql>
 
 <select id="getByParm_count" resultType="Integer">

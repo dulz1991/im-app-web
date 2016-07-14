@@ -1,7 +1,8 @@
-define(['views/newsDetailView'], function (View) {
+define(['views/newsDetailView','utils'], function (View,utils) {
 
 	var _userId;
 	var _newsId;
+	var _replyToUserId="";
 	
 	var bindings = [{
         element: '.chat',
@@ -19,6 +20,14 @@ define(['views/newsDetailView'], function (View) {
     	element: '.infinite-scroll-reply',
         event: 'infinite',
         handler: pahgeScroll
+    },{
+    	element: '.view-user',
+        event: 'click',
+        handler: viewUser
+    },{
+    	element: '.reply-user',
+        event: 'click',
+        handler: replyUser
     }];
 
     function init(query) {
@@ -45,24 +54,31 @@ define(['views/newsDetailView'], function (View) {
     };
     
     function gotoChat() {
-    	_userId = $$('input[name="hidden_newsid"]').val();
+    	_userId = $$('input[name="hidden_userid"]').val();
     	/*viewChat.loadPage("/pages/chat/chat.html?friendUserId="+_userId);*/
     }
     
     function gotoComment() {
-    	myApp.pickerModal('.picker-info')
+    	$$('input[name="comment"]').attr('placeholder','评论：');
+    	_replyToUserId = $$(this).attr('replyuserid');
+    	myApp.pickerModal('.picker-info');
     }
     
     function sumbitComment() {
     	_userId = $$('input[name="hidden_userid"]').val();
     	var replyToUserId = _userId;
+    	if(_replyToUserId==""){
+    		_replyToUserId = _userId;
+    	}
     	var replyContent = $$('input[name="comment"]').val();
+    	if(replyContent==""){
+    		return false;
+    	}
     	$$.ajax({
             url: '/auth/home/sumbitComment',
             data: {
             		newsId: _newsId,
-            		replyUserId: _userId,
-            		replyToUserId: replyToUserId,
+            		replyToUserId: _replyToUserId,
             		replyContent: replyContent
             	},
             type: 'POST',
@@ -70,13 +86,16 @@ define(['views/newsDetailView'], function (View) {
             success: function (data) {
             	if (data.errorNo == 200) {
             		var html = '';
-            		html += '<div class="card-footer comment-tetm" replyid='+data.reply.id+'>';
+            		html += '<div class="card-content-inner comment-item" replyid='+data.reply.id+' style="font-size:16px;padding:10px;">';
             		html += data.reply.replyUserNick +' | '+ data.reply.reply_content;
                 	html += '</div>';
                 	$$('.comment-list').prepend(html);
+                	$$('input[name="comment"]').val("");
+                	utils.bindEvents(bindings);
             	} else {
             		
             	}
+            	myApp.closeModal('.picker-info');
             }
         });
     }
@@ -121,6 +140,19 @@ define(['views/newsDetailView'], function (View) {
 	            }
 	        });
     	}, 1000);
+    }
+    
+    function viewUser(){
+    	_userId = $$('input[name="hidden_userid"]').val();
+    	viewFriend.router.loadPage("/pages/friend/friendDetail.html?friendUserId="+_userId);
+    	/*viewChat.reloadPage("/pages/friend/friendDetail.html?friendUserId="+_userId);*/
+    }
+    
+    function replyUser(){
+    	var usernick = $$(this).prev('span').text();
+    	_replyToUserId = $$(this).attr('replyuserid');
+    	$$('input[name="comment"]').attr('placeholder','回复'+usernick+':');
+    	myApp.pickerModal('.picker-info');
     }
     
 });

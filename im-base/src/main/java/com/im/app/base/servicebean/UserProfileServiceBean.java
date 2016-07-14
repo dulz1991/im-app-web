@@ -101,6 +101,4 @@ public class UserProfileServiceBean implements UserProfileService {
 		return resMap;
 	}
 
-
-
 }

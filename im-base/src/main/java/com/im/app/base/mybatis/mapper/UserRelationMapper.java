@@ -18,4 +18,6 @@ public interface UserRelationMapper {
 	
 	UserRelation getById(Long id);
 
+	UserRelation isFriend(@Param("myUserId") Long currentUserId, @Param("friendUserId") Long friendUserId);
+
 }

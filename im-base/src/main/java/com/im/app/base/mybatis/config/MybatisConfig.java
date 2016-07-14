@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 
 import com.im.app.base.mybatis.mapper.ChatRoomMapper;
 import com.im.app.base.mybatis.mapper.MessageMapper;
+import com.im.app.base.mybatis.mapper.NewFriendMapper;
 import com.im.app.base.mybatis.mapper.NewsMapper;
 import com.im.app.base.mybatis.mapper.NewsReplyMapper;
 import com.im.app.base.mybatis.mapper.UserProfileMapper;
@@ -52,6 +53,10 @@ public class MybatisConfig {
 	@Bean
 	public ChatRoomMapper ChatRoomMapper() throws Exception {
 		return newMapperFactoryBean(ChatRoomMapper.class).getObject();
+	}
+	@Bean
+	public NewFriendMapper NewFriendMapper() throws Exception {
+		return newMapperFactoryBean(NewFriendMapper.class).getObject();
 	}
 	
 	<T> MapperFactoryBean<T> newMapperFactoryBean(Class<T> clazz) throws Exception {

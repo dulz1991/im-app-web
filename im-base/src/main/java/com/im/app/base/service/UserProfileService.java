@@ -25,5 +25,5 @@ public interface UserProfileService {
 	List<UserProfile> findByIdsMap(List<String> ids);
 	
 	Map<String, Object> regist(Map<String, Object> reqMap);
-
+	
 }

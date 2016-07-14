@@ -74,6 +74,7 @@ public class HomeController extends BaseController {
 	@RequestMapping(value = "/sumbitComment", method=RequestMethod.POST)
 	public Map<String, Object> sumbitComment(NewsReply newsReply) {
 		Map<String, Object> reqMap = new HashMap<String, Object>();
+		newsReply.setReplyUserId(this.getCurrentUserId());
 		int count = newsReplyService.insert(newsReply);
 		if (count > 0) {
 			Map<String, Object> reply = newsReplyService.getById(newsReply.getId());

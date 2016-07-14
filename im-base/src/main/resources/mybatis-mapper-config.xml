@@ -37,6 +37,7 @@
         <mapper resource="sqlmap/NewsReplyMapper.xml"/>
         <mapper resource="sqlmap/MessageMapper.xml"/>
         <mapper resource="sqlmap/ChatRoomMapper.xml"/>
+        <mapper resource="sqlmap/NewFriendMapper.xml"/>
         <!-- <package name="demo.framework.mybatis.xml"/> -->
     </mappers>
     

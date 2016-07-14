@@ -83,14 +83,8 @@ define(['GS'], function (GS) {
 		return html;
 	}
 	//工具栏显示消息提示
-	function appendMsgToToolbar(data) {
-		var num = $$('.tab-link span.bg-red').text();
-		if(num==""){
-			num=1;
-		} else {
-			 num = parseInt(num) + 1;
-		}
-		$$('.tab-link span.bg-red').text(num);
+	function appendMsgToToolbar() {
+		GS.refreshToolbar();
 	}
 	
 	return {

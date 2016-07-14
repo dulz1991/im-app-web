@@ -1,0 +1,44 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="link icon-only back" id="backToMain">
+                <i class="icon icon-back"></i> 新的朋友
+            </a>
+        </div>
+        <div class="center newstitle sliding"></div>
+        <div class="right"> 
+        	<a href="#" class="link icon-only open-panel">
+        		<i class="icon icon-bars"></i>
+        	</a>
+        </div>
+    </div>
+</div>
+
+<div class="pages navbar-through">
+    <div data-page="newFriend" class="page">
+        <div class="page-content infinite-scroll-reply" id="newFriendContent">
+            <script id="newFriendTemplate" type="text/template">
+
+			<div class="list-block">
+                <ul>
+				{{#each friends}}
+                  <li class="swipeout">
+                    <div class="swipeout-content item-content">
+                      <div class="item-media"><img width="32" src="{{req_avatar}}" /></div>
+                      <div class="item-inner">
+                        <div class="item-title">{{req_user_nick}}</div>
+                        <div class="item-after"></div>
+                      </div>
+                    </div>
+                    <div class="swipeout-actions-right">
+						<a href="#" class="action1 bg-green request-agree" frienduserid={{request_user_id}} id={{id}}>同意</a>
+						<a href="#" class="swipeout-delete request-reject" frienduserid={{request_user_id}} id={{id}}>拒绝</a>	
+					</div>
+                  </li>
+				{{/each}}
+                </ul>
+              </div>
+            </script>
+        </div>
+    </div>
+</div>

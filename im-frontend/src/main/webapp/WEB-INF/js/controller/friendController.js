@@ -4,6 +4,10 @@ define(['views/friendView'], function (View) {
 		element: '.friend-list ul li',
         event: 'click',
         handler: gotoFriendDetail
+	},{
+		element: '.new-friend',
+        event: 'click',
+        handler: viewNewFriend
 	}];
 
     function init(query) {
@@ -31,5 +35,8 @@ define(['views/friendView'], function (View) {
     	
     }
     
+    function viewNewFriend(){
+    	
+    }
     
 });

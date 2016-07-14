@@ -41,6 +41,7 @@ public class UserRelationServiceBean implements UserRelationService {
 			UserProfile userProfile = userProfileServiceBean.getById(user.getFriendUserId());
 			map.put("avatar", userProfile.getAvatar());
 			map.put("usernick", userProfile.getUsernick());
+			map.put("personalNote", userProfile.getPersonalNote());
 			list.add(map);
 		}
 		return list;
@@ -54,6 +55,16 @@ public class UserRelationServiceBean implements UserRelationService {
 	@Override
 	public UserRelation getById(Long id) {
 		return userRelationMapper.getById(id);
+	}
+
+	@Override
+	public boolean isFriend(Long currentUserId, Long friendUserId) {
+		UserRelation userRelation = userRelationMapper.isFriend(currentUserId, friendUserId);
+		if (userRelation != null) {
+			return true;
+		} else {
+			return false;	
+		}
 	}
 
 

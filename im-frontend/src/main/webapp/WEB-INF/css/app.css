@@ -15,6 +15,13 @@
   width:34px;
   height:34px;
 }
+.picker-modal-inner{
+	
+}
+.picker-modal-inner .content-block input{
+	background-color:rgna(0,0,0,0);
+	border:0;
+}
 
 /*************************** 注册登陆 *******************************/
 .swiper-container {
@@ -35,3 +42,10 @@
 /*************************** chat *******************************/
 .messagebar{ z-index:999; position:fixed; bottom:0; left:0; width:100%; _position:absolute;
  _top: expression_r(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); overflow:visible; }
+
+ /*************************** mine *******************************/
+ .clear-chat .item-inner .item-subtitle{font-size:12px;color:#aaa;}
+ .clear-cache .item-inner .item-subtitle{font-size:12px;color:#aaa;}
+ 
+ 
+ 

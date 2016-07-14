@@ -37,7 +37,7 @@ public class IMWebSocket {
      
     //concurrent包的线程安全Set，用来存放每个客户端对应的IMWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
     private static CopyOnWriteArraySet<IMWebSocket> webSocketSet = new CopyOnWriteArraySet<IMWebSocket>();
-    private static Map<Long, IMWebSocket> webSocketMap = new HashMap<Long, IMWebSocket>();
+    public static Map<Long, IMWebSocket> webSocketMap = new HashMap<Long, IMWebSocket>();
     
     private static UserProfileService userProfileService;
     private static MessageService messageService;
@@ -139,13 +139,8 @@ public class IMWebSocket {
      */
     public void sendMessage(String message, Long friendUserId, Long currentUserId, int friendFlag) throws IOException, EncodeException{
     	Message msg = new Message();
-    	if (friendFlag == 1) {
-    		msg.setSendUserId(currentUserId);
-    		msg.setReceiveUserId(friendUserId);
-    	} else {
-    		msg.setSendUserId(friendUserId);
-    		msg.setReceiveUserId(currentUserId);
-    	}
+    	msg.setSendUserId(currentUserId);
+    	msg.setReceiveUserId(friendUserId);
 		UserProfile userProfile = userProfileService.getById(currentUserId);
 		msg.set_avatar(userProfile.getAvatar());
 		msg.set_username(userProfile.getUsernick());
@@ -184,6 +179,10 @@ public class IMWebSocket {
 		} else {
 			return userProfile.getId();
 		}
+	}*/
+    
+    /*public void newFriendNotify(UserProfile userProfile) {
+    	this.session.getBasicRemote().sendText(msg2Json);
 	}*/
 
 }

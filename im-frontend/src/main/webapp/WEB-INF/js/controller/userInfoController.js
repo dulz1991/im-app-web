@@ -12,6 +12,14 @@ define(['views/userInfoView'], function (View) {
 		element: '.select-sex',
         event: 'click',
         handler: selectSex
+	},{
+		element: '.personal-note',
+        event: 'click',
+        handler: modifyPersonalNote
+	},{
+		element: '.submit-personal-note',
+        event: 'click',
+        handler: doModifyPersonalNote
 	}];
 
     function init(query) {
@@ -35,12 +43,26 @@ define(['views/userInfoView'], function (View) {
         init: init
     };
     
-    function modifySex() {
+    function showScreen() {
     	myApp.loginScreen();
     }
     
     function hideScreen() {
     	myApp.closeModal();
+    }
+    
+    function modifySex(){
+    	$$('.display').hide();
+    	$$('.display-sex').show();
+    	showScreen();
+    }
+    
+    function modifyPersonalNote(){
+    	$$('.display').hide();
+    	$$('.display-personal-note').show();
+    	var curNote = $$(this).find('.mine-personal-note').text();
+    	$$('textarea[name="personalNote"]').val(curNote);
+    	showScreen();
     }
     
     function selectSex() {
@@ -60,7 +82,26 @@ define(['views/userInfoView'], function (View) {
 					} else {
 						$$('.sex-content').html('女<img src="/img/icon/girl.png" width="18" />');	
 					}
-					myApp.closeModal();
+					hideScreen();
+				}
+			}  
+		}); 
+    }
+    
+    function doModifyPersonalNote(){
+    	var personalNote = $$('textarea[name="personalNote"]').val();
+    	$.ajax({  
+			type:'post',      
+			url:'/auth/mine/update',  
+			data:{personalNote:personalNote},  
+			cache:false,  
+			dataType:'json',  
+			success:function(data){  
+				if(data.errorNo!=200){
+					myApp.alert(data.errorInfo,'提示：');
+				} else {
+					$$('.mine-personal-note').text(personalNote);
+					hideScreen();
 				}
 			}  
 		}); 

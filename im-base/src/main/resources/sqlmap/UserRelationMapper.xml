@@ -60,4 +60,8 @@
 	select * from user_relation where id = #{id}
 </select>
 
+<select id="isFriend" resultMap="UserRelationBaseMapper">
+	select * from user_relation where my_user_id = ${myUserId} and friend_user_id=${friendUserId} 
+</select>
+
 </mapper>

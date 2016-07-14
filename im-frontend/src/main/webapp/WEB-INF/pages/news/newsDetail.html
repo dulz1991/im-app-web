@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="left">
             <a href="#" class="link icon-only back" id="backToMain">
-                <i class="icon icon-back"></i>
+                <i class="icon icon-back"></i> 详情
             </a>
         </div>
         <div class="center newstitle sliding"></div>
@@ -25,17 +25,18 @@
 						<p style="padding:20px 20px 0px 20px;">{{news.news}}</p>
 					</div>
 					<div class="card-footer" style="color:#aaa;">
-						{{news.user_nick}} | {{news.create_str}} | 
+						<span>{{news.user_nick}} </span>
+						<span>{{news.create_str}} </span> 
 						{{#if isChat}}
-						<span class="chat"><a href="/pages/chat/chat.html?friendUserId={{news.user_id}}">聊天</a></span> | 
+						<span class="chat"><a style="color:#aaa;" href="/pages/chat/chat.html?friendUserId={{news.user_id}}">聊天</a></span>  
 						{{/if}}
-						<span class="comment">评论</span>
+						<span class="comment" replyuserid={{news.user_id}}>评论</span>
 					</div>
 				</div>	
 				<div class="card comment-list">	
 					{{#each commentList}} 
-						<div class="card-footer comment-tetm" replyid={{id}}>
-							{{replyUserNick}} | {{reply_content}}
+						<div class="card-content-inner comment-item" replyid={{id}} style="font-size:16px;padding:10px;">
+							<span class="view-user">{{replyUserNick}}</span> 回复  {{replyToUserNick}} | <span class="reply-user" replyuserid={{reply_user_id}}>{{reply_content}}</span>
 						</div>
 					{{/each}}
 				</div>
@@ -46,13 +47,14 @@
       					<div class="toolbar-inner">
         					<div class="left"></div>
         					<div class="right">
-								<a href="#" class="close-picker complete-input">完成</a>
+								<a href="#" class="close-picker">取消</a>
+								<a href="#" class="complete-input">完成</a>
 							</div>
       					</div>
     				</div>
     				<div class="picker-modal-inner">
       					<div class="content-block">
-        					<input type="text" class="item-input" name="comment" placeholder="回复:" value="" />
+        					<input type="text" class="item-input" name="comment" placeholder="评论:" value="" />
       					</div>
     				</div>
   				</div>

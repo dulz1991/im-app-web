@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '/js',
     paths: {
-    	Framework7: '/js/libs/framework7.min',
+    	Framework7: '/js/libs/framework7',
     	router: '/js/router',
     	GS: '/js/globalService',
     	WS: '/js/websocket'

@@ -76,7 +76,9 @@ define([], function () {
         getLocalStorageByKey: getLocalStorageByKey,
         setLocalStorage: setLocalStorage,
         clearLocalStorage: clearLocalStorage,
-        updateLocalStorageChatList: updateLocalStorageChatList
+        updateLocalStorageChatList: updateLocalStorageChatList,
+        refreshToolbar: refreshToolbar,
+        clearChatStatus: clearChatStatus
     };
     
     function clearLocalStorage(key) {
@@ -108,15 +110,21 @@ define([], function () {
     	//是否存在数据
     	if (jsonObj) {
     		$$.each(jsonObj.chatList, function(index, json) {
-    			if (json.userId == value.userId) {
+    			if (json.sendUserId == value.sendUserId) {
     				json.message = value.message;
     				json._createTimeStr = new Date().format("yyyy-MM-dd HH:mm:ss");
+    				json.hasNew = true;
+    				if($$('.item-title-row_'+value.sendUserId).text().indexOf('new')<0){
+    					$$('.item-title-row_'+value.sendUserId).append('<div class="item-title item-title_'+value.sendUserId+'"><span class="badge bg-red">new</span></div>');
+    				}
+    				$$('.item-text_'+value.sendUserId).text(value.message);
     				flag = true;
     				localStorage.setItem("chat_list", JSON.stringify(jsonObj));
     				return;
     			}
     		});
     		if (!flag) {
+    			value.hasNew = true;
     			jsonObj.chatList.push(value);
     			localStorage.setItem("chat_list", JSON.stringify(jsonObj));
     		}
@@ -124,6 +132,39 @@ define([], function () {
     		jsonObj = {"chatList":[]};
     		jsonObj.chatList.push(value);
     		localStorage.setItem("chat_list", JSON.stringify(jsonObj));
+    	}
+    }
+    
+    function clearChatStatus(friendUserId) {
+    	var jsonObj =  JSON.parse(getLocalStorageByKey("chat_list"));
+    	if (jsonObj) {
+    		$$.each(jsonObj.chatList, function(index, json) {
+    			if (json.sendUserId == friendUserId) {
+    				json.hasNew = false;
+    				$$('.item-title_'+friendUserId).remove();
+    				localStorage.setItem("chat_list", JSON.stringify(jsonObj));
+    				return false;
+    			}
+    		});
+    	}
+    }
+    
+    function refreshToolbar() {
+    	var jsonObj =  JSON.parse(getLocalStorageByKey("chat_list"));
+		var len = 0;
+		if (jsonObj) {
+    		$$.each(jsonObj.chatList, function(index, json) {
+    			if (json.hasNew) {
+    				len++;
+    			}
+    		});
+    		if(len==0){
+    			$$('.tab-link i.icon-chat').html('');
+    		}else{
+    			$$('.tab-link i.icon-chat').html('<span class="badge bg-red">'+len+'</span>');	
+    		}
+    	} else {
+    		$$('.tab-link i.icon-chat').html('');
     	}
     }
     

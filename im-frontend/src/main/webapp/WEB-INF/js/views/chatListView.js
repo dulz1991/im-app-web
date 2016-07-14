@@ -5,7 +5,7 @@ define(['utils'], function (Utils) {
         var renderTemplate = compiledTemplate(params.model);
 
         $$('#chatListContent').html(renderTemplate);
-        /*Utils.bindEvents(params.bindings);*/
+        Utils.bindEvents(params.bindings);
     }
 
     return {

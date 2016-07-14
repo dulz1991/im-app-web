@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.im.app.base.bean.ChatRoom;
-import com.im.app.base.mybatis.mapper.ChatRoomMapper;
+import com.im.app.base.service.ChatRoomService;
 import com.im.app.base.service.MessageService;
 import com.im.app.base.service.UserProfileService;
 import com.im.app.frontend.converter.ChatConverter;
@@ -25,7 +25,7 @@ public class ChatController extends BaseController {
 	@Autowired
 	private MessageService messageService;
 	@Autowired
-	private ChatRoomMapper ChatRoomMapper;
+	private ChatRoomService chatRoomService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/chatRoom", method=RequestMethod.GET)
@@ -34,12 +34,12 @@ public class ChatController extends BaseController {
 		Map<String, Object> reqMap = new HashMap<String, Object>();
 		reqMap.put("myUserId", currentUserId);
 		reqMap.put("friendUserId", friendUserId);
-		ChatRoom chatRoom = ChatRoomMapper.getChatRoomByParm(reqMap);
+		ChatRoom chatRoom = chatRoomService.getChatRoomByParm(reqMap);
 		if(chatRoom==null){
 			chatRoom = new ChatRoom();
 			chatRoom.setMyUserId(currentUserId);
 			chatRoom.setFriendUserId(friendUserId);
-			ChatRoomMapper.insert(chatRoom);
+			chatRoomService.insert(chatRoom);
 		}
 		
 		Map<String, Object> resMap = new HashMap<String, Object>();

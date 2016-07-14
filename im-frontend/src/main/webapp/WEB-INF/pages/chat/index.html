@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="left">
             <a href="#" class="link icon-only back" id="backToMain">
-                <i class="icon icon-back"></i>
+                <i class="icon icon-back"></i> 聊天列表
             </a>
         </div>
         <div class="center newstitle sliding"></div>
@@ -23,14 +23,15 @@
                 	<ul>
 						{{#each chatList}}
                   		<li>
-							<a href="/pages/chat/chat.html?friendUserId={{userId}}" class="item-link item-content">
+							<a href="#" senduserid={{sendUserId}} class="item-link item-content goto-chat">
                       			<div class="item-media"><img src="{{_avatar}}" width="40"></div>
                       			<div class="item-inner">
-                        			<div class="item-title-row">
+                        			<div class="item-title-row item-title-row_{{sendUserId}}">
                           				<div class="item-title">{{_username}}</div>
+										<div class="item-title item-title_{{sendUserId}}"><span class="badge bg-red">new</span></div>
                         			</div>
 									<div class="item-subtitle"></div>
-                        			<div class="item-text" style="height:24px;">{{message}}</div>
+                        			<div class="item-text item-text_{{sendUserId}}" style="height:24px;">{{message}}</div>
                       			</div>	
 							</a>
 						</li>
