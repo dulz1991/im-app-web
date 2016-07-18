@@ -721,10 +721,12 @@
                 return app.showNavbar(container.find('.navbar'));
             };
             view.hideToolbar = function () {
-                return app.hideToolbar($('.views').find('.toolbar'));
+            	/*return app.hideToolbar($(container).find('.toolbar'));*/
+            	return app.hideToolbar($(container).parents('.views').find('.toolbar'));
             };
             view.showToolbar = function () {
-                return app.showToolbar($('.views').find('.toolbar'));
+                /*return app.showToolbar($(container).find('.toolbar'));*/
+            	return app.showToolbar($(container).parents('.views').find('.toolbar'));
             };
         
             // Push State on load
@@ -1020,12 +1022,16 @@
             return true;
         };
         app.hideToolbar = function (toolbarContainer) {
-            $(toolbarContainer).addClass('toolbar-hidden');
+            /*$(toolbarContainer).addClass('toolbar-hidden');*/
+        	$(toolbarContainer).addClass('not-display');
             return true;
         };
         app.showToolbar = function (toolbarContainer) {
             var toolbar = $(toolbarContainer);
-            toolbar.addClass('toolbar-hiding').removeClass('toolbar-hidden').transitionEnd(function () {
+            /*toolbar.addClass('toolbar-hiding').removeClass('toolbar-hidden').transitionEnd(function () {
+                toolbar.removeClass('toolbar-hiding');
+            });*/
+            toolbar.addClass('toolbar-hiding').removeClass('not-display').transitionEnd(function () {
                 toolbar.removeClass('toolbar-hiding');
             });
         };

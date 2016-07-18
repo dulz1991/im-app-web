@@ -45,6 +45,7 @@ define(['views/newsDetailView','utils'], function (View,utils) {
                 });
                 myApp.hideIndicator();
                 /*myApp.hideToolbar('.toolbar');*/
+                /*viewNews.hideToolbar();*/
             }
         });
     }

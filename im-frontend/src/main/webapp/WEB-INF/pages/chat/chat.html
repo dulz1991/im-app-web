@@ -19,7 +19,7 @@
         <div class="page-content" id="chatRoomContent">
             <script id="chatRoomTemplate" type="text/template">
 
-              <div class="messages messages-auto-layout">
+              <div class="messages messages-auto-layout" style="margin-bottom:50px;">
                 
 				<!--
 				<div class="messages-date">Sunday, Feb 9 <span>12:58</span></div>
@@ -37,7 +37,7 @@
 
 				{{#each chats}}
 					{{#if me}}
-						div class="message message-sent message-first">
+						<div class="message message-sent message-first">
                   			<div class="message-text">{{message}}</div>
                 		</div>
 					{{else}}
