@@ -12,6 +12,7 @@ import com.im.app.base.bean.UserProfile;
 import com.im.app.base.common.CommonConstant;
 import com.im.app.base.mybatis.mapper.UserProfileMapper;
 import com.im.app.base.service.UserProfileService;
+import com.im.app.base.util.MD5Util;
 import com.im.app.base.util.PageUtil;
 
 @Component
@@ -87,6 +88,8 @@ public class UserProfileServiceBean implements UserProfileService {
 		userProfile = new UserProfile();
 		userProfile.setUsernick(usernick);
 		userProfile.setSex(sex);
+		MD5Util md5Util = new MD5Util("im", "MD5");
+		password = md5Util.encode(password);
 		userProfile.setPassword(password);
 		if(StringUtils.isBlank(avatar)){
 			if(sex==1){

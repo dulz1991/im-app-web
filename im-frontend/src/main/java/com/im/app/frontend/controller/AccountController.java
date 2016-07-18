@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.im.app.base.bean.UserProfile;
 import com.im.app.base.common.CommonConstant;
 import com.im.app.base.service.UserProfileService;
+import com.im.app.base.util.MD5Util;
 import com.im.app.frontend.util.CookieUtil;
 
 @Controller
@@ -48,6 +49,8 @@ public class AccountController {
 		if(!resMap.get(CommonConstant.ERROR_NO).equals(CommonConstant.ERROR_200)) { 
 			return resMap;
 		}
+		MD5Util md5Util = new MD5Util("im", "MD5");
+		user.setPassword(md5Util.encode(user.getPassword()));
 		UserProfile u = userProfileService.findUserByUsernameAndPassword(user);
 		if (u != null) {
 			ObjectMapper mapper = new ObjectMapper();
